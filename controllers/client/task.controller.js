@@ -29,6 +29,14 @@ module.exports.index = async (req, res) => {
 
   //Hết phân trang
 
+  //Tìm kiêm
+  if (req.query.keyword) {
+    const regex = new RegExp(req.query.keyword, "i");
+    find.title = regex;
+  }
+
+  //Hết tìm kiếm
+
   const data = await Task.find(find).limit(limitItems).skip(skip).sort(sort);
   res.json(data);
 };
